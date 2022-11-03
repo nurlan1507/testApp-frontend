@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter,Routes, Route} from 'react-router-dom'
 import SignUp from './pages/SignUp'
-
+import SignIn from './pages/SignIn'
 function App() {
     const currentMode = 'light'
     const activeMenu = false
@@ -23,7 +23,7 @@ function App() {
                             <Routes>
                                 <Route path={'/home'} element={'home'}/>
                                 <Route path={'/signUp'} element={<SignUp/>}/>
-                                <Route path={'/signIn'} element={'signIn'}/>
+                                <Route path={'/signIn'} element={<SignIn/>}/>
                             </Routes>
 
                     </div>

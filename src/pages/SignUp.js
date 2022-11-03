@@ -5,8 +5,10 @@ import LockIcon from '@mui/icons-material/Lock';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import PersonIcon from '@mui/icons-material/Person'
 import {useState} from 'react'
+import {useNavigate} from "react-router-dom"
 import {parseToJson} from "../Helpers/helpers";
 export default function SignUp(){
+    const navigate = useNavigate()
     const [errMap,setErr] = useState(new Map())
     const updateErrMap =(key,value)=>{
         setErr(err=>new Map(err.set(key,value)))
@@ -28,19 +30,24 @@ export default function SignUp(){
             withCredentials:true,
             body:JSON.stringify(body)
         })
-        if (!res.ok){
+        if (res.status===400){
             let errors =await parseToJson(res)
             for (let key in errors){
-                console.log("log")
                 updateErrMap(key, errors[key])
             }
-            console.log(errMap)
+        }else if(res.status === 500){
+            console.log(500)
+        }else if(res.status===200){
+            navigate('/home')
         }
+
         const data = {...await parseToJson(res)}
+        console.log(data)
+        console.log(res)
     }
 
     return(
-        <div className={'w-full  bg-main-bg dark:db-main-dark-bg   h-full' } style={{padding:"100px"}} >
+        <div className={'w-full  bg-main-bg dark:db-main-dark-bg  h-full' } style={{paddingTop:"100px"}} >
             <div className={'w-4/5 md:w-full flex flex-col items-center  m-auto '}>
                 <h1 className={'text-center '}>Sign Up</h1>
                 <div className={'w-full md:w-full max-w-lg flex items-center flex-col'}>

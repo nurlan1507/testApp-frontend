@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter,Routes, Route} from 'react-router-dom'
 import SignUp from './pages/SignUp'
+
 function App() {
     const currentMode = 'light'
     const activeMenu = false

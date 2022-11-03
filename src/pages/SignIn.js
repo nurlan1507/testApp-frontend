@@ -7,7 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import {parseToJson} from "../Helpers/helpers";
 import {useNavigate} from "react-router-dom";
 
-
+import {User} from '../store/userStore'
 
 
 
@@ -40,7 +40,10 @@ export default function SignIn(){
             console.log(500)
         }else if (res.status===200){
             var data = await parseToJson(res)
-            cookies.set('AccessToken', data.AccessToken, "/")
+            console.log(data)
+            cookies.set('accessToken', data.AccessToken)
+            let newUser = new User()
+            newUser.getUserData()
             navigate("/")
         }
     }

@@ -20,13 +20,12 @@ function App() {
                     )
                     }
                     <div className={`w-full dark:bg-main-dark bg-main-bg min-h-screen `}>
-                        <div>
                             <Routes>
                                 <Route path={'/home'} element={'home'}/>
                                 <Route path={'/signUp'} element={<SignUp/>}/>
                                 <Route path={'/signIn'} element={'signIn'}/>
                             </Routes>
-                        </div>
+
                     </div>
                 </div>
 

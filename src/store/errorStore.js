@@ -1,4 +1,4 @@
-import {action, computed, makeAutoObservable, makeObservable, observable} from "mobx";
+import { makeAutoObservable} from "mobx";
 
 class ErrorStore{
     errors = new Map()

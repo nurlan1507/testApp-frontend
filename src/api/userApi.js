@@ -1,6 +1,7 @@
 import {parseToJson} from "../Helpers/helpers";
 import ErrorStore from "../store/errorStore"
-export const signIn =async(email,password)=>{
+
+export const signInApi =async(email,password)=>{
     const body = {
         email,
         password
@@ -13,20 +14,51 @@ export const signIn =async(email,password)=>{
     if (res.status===400){
         let errors = await parseToJson(res)
         ErrorStore.setErrors(errors)
-        return errors
+        return res.status
     }else if(res.status===500){
         console.log(500)
     }else if (res.status===200){
-        var data = await parseToJson(res)
-        console.log(data)
-        window.localStorage.setItem("accessToken", data.AccessToken)
+        return await parseToJson(res)
     }
 }
 
-export const signUp =async()=>{
+export const singUpApi=async(email, username,password, repeatPassword)=>{
+    console.log(email,username,password)
+    var body ={
+        username,
+        email,
+        password,
+        repeatPassword,
+    }
+    try{
+        const res = await fetch("http://localhost:4000/signUp",{
+            method:"POST",
+            withCredentials:true,
+            body:JSON.stringify(body)
+        })
+        if (res.status===400){
+            let errors =await parseToJson(res)
+            ErrorStore.setErrors(errors)
+            return
+        }else if(res.status === 500){
+            return
+        }else if(res.status===200){
+            window.location.href="/home"
+            return {...await parseToJson(res)}
+        }
+    }catch (e){
+        return e
+    }
+
+
 
 }
-
 export const RefreshAccessToken =async()=>{
-
+    const res = await fetch("http://localhost:4000/getNewAccessToken")
+    if (res.status !== 200){
+        window.location.href = "/signIn"
+        return
+    }
+    console.log(res)
+    return await parseToJson(res)
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import {BrowserRouter,Routes, Route} from 'react-router-dom'
 import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
+import Home from './pages/Home'
 function App() {
     const currentMode = 'light'
     const activeMenu = false
@@ -21,7 +22,7 @@ function App() {
                     }
                     <div className={`w-full dark:bg-main-dark bg-main-bg min-h-screen `}>
                             <Routes>
-                                <Route path={'/home'} element={'home'}/>
+                                <Route path={'/home'} element={<Home/>}/>
                                 <Route path={'/signUp'} element={<SignUp/>}/>
                                 <Route path={'/signIn'} element={<SignIn/>}/>
                             </Routes>

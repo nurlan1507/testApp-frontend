@@ -2,16 +2,16 @@ import React, {useState} from 'react'
 import {Input, InputLabel, InputAdornment, Alert} from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-import Cookies from 'universal-cookie';
-import PersonIcon from '@mui/icons-material/Person';
-import {parseToJson} from "../Helpers/helpers";
+import {signIn} from "../api/userApi";
 import {useNavigate} from "react-router-dom";
+import {observer} from "mobx-react-lite";
+import UserSessionManager from "../store/userStore";
+import ErrorStore from "../store/errorStore";
+import {toJS} from "mobx";
 
-import {User} from '../store/userStore'
 
 
-
-export default function SignIn(){
+const SignIn=observer(()=>{
     const navigate = useNavigate()
     const [email,setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -19,34 +19,8 @@ export default function SignIn(){
     const updateErrMap =(key,value)=>{
         setErr(err=>new Map(err.set(key,value)))
     }
-    const cookies = new Cookies()
-    const signIn =async()=>{
-        const body = {
-            email,
-            password
-        }
-        const res = await fetch("http://localhost:4000/signIn", {
-            method:"POST",
-            mode:"cors",
-            body: JSON.stringify(body)
-        })
-        if (res.status===400){
-            let errors = await parseToJson(res)
-            for ( var key in errors){
-                updateErrMap(key,errors[key])
-            }
-            console.log(errMap)
-        }else if(res.status===500){
-            console.log(500)
-        }else if (res.status===200){
-            var data = await parseToJson(res)
-            console.log(data)
-            cookies.set('accessToken', data.AccessToken)
-            let newUser = new User()
-            newUser.getUserData()
-            navigate("/")
-        }
-    }
+    var errs = toJS(ErrorStore.errors)
+
 
     return(
         <div className={'w-full bg-main-bg dark:db-main-dark-bg'}  style={{paddingTop:"100px"}}>
@@ -62,7 +36,8 @@ export default function SignIn(){
                         }
                                onChange={(e)=>setEmail(e.target.value)}
                         />
-                        {errMap.get("email") && <Alert severity="error" className={'p-0'}>{errMap.get("email")}</Alert>}
+                        {errs.get("email") && <Alert severity="error" className={'p-0'}>{errs.get("email")}</Alert>}
+
                     </div>
                     <div className={"mt-8 w-full"} >
                         <InputLabel htmlFor={'password'}>Password:</InputLabel>
@@ -73,7 +48,7 @@ export default function SignIn(){
                         }
                                onChange={(e)=>{setPassword(e.target.value)}}
                         />
-                        {errMap.get("password") && <Alert severity="error" className={'p-0'}>{errMap.get("password")}</Alert>}
+                        {errs.get("password") && <Alert severity="error" className={'p-0'}>{errs.get("password")}</Alert>}
                     </div>
                     <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} onClick={()=>signIn(email,password)} type={"button"}>Sign Up</button>
             </div>
@@ -81,4 +56,6 @@ export default function SignIn(){
             </div>
         </div>
     )
-}
+})
+
+export default SignIn

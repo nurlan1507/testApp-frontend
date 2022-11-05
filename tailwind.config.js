@@ -8,6 +8,10 @@ module.exports = {
       body: ['Open Sans', 'sans-serif'],
     },
     extend: {
+      screens:{
+        'mobile': '450px',
+        'tablet': '700px'
+      },
       fontSize: {
         14: '14px',
       },
@@ -18,6 +22,7 @@ module.exports = {
         'light-gray': '#F7F7F7',
         'submit-blue':'#376cfa',
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
+        'bg-hover':'#7E7D7DFF'
       },
       borderWidth: {
         1: '1px',

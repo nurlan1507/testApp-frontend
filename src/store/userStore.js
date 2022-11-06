@@ -5,8 +5,25 @@ import {RefreshAccessToken} from "../api/userApi";
 import {signInApi,singUpApi} from "../api/userApi";
 
 
+class user{
+    userId
+    username
+    email
+    role
+    exp
+    constructor(id,username,email,role,exp) {
+        this.userId = id
+        this.username =username
+        this.email = email
+        this.role = role
+        this.exp = exp
+    }
+
+
+}
+
 export class UserSessionManager {
-    user = null
+    user = new user()
     constructor() {
         this.user = null
         makeObservable(
@@ -18,8 +35,9 @@ export class UserSessionManager {
         )
         const token = window.localStorage.getItem("accessToken")
         console.log(token)
-        if (token){
-            this.user = jwtDecode(token)
+        try{
+            var newuser = jwtDecode(token)
+            this.user = new user(newuser.Id, newuser.Username, newuser.Email,newuser.Role , newuser.exp)
             console.log(toJS(this.user))
             window.addEventListener("storage", (ev) => {
                 if (ev.key === "accessToken") {
@@ -27,17 +45,25 @@ export class UserSessionManager {
                     this.processToken(ev.newValue)
                 }
             })
+            console.log(this.user)
             setInterval(() => this.checkTokenExpiry(token), 300000)
-        }else{
-            console.log("sds")
+        }catch (e){
+            window.localStorage.removeItem("accessToken")
+            const newToken = this.getNewToken()
+            console.log("NEWTOKEN")
+            window.localStorage.setItem("accessToken", JSON.stringify(newToken.Value))
         }
+
+    }
+
+    async getNewToken(){
+        return await RefreshAccessToken()
     }
 
     async signUp(email, username,password, repeatPassword) {
         try{
             let res = await singUpApi(email, username,password, repeatPassword)
-            console.log(res)
-            this.user = res
+            this.user = new user(res.id, res.username, res.email, res.role)
             console.log(this.user)
             window.localStorage.setItem("accessToken", res.AccessToken)
             window.location.href="/home"
@@ -49,7 +75,7 @@ export class UserSessionManager {
     async signIn(email,password){
         try{
             let res = await signInApi(email,password)
-            this.user = res
+            this.user = new user(res.id, res.username, res.email, res.role)
             window.localStorage.setItem("accessToken", res.AccessToken)
             window.location.href="/home"
         }catch (e){
@@ -62,7 +88,8 @@ export class UserSessionManager {
             return
         }
         try{
-            this.user = jwtDecode(token)
+            var newuser = jwtDecode(token)
+            this.user = new user(newuser.Id, newuser.Username, newuser.Email,newuser.Role , newuser.exp)
             console.log(this.user)
         }catch (e) {
             alert(e.message);
@@ -74,7 +101,6 @@ export class UserSessionManager {
     updateToken(token){
         window.localStorage.setItem("accessToken",JSON.stringify(token))
     }
-
 
    async checkTokenExpiry(token) {
         if (!token) {

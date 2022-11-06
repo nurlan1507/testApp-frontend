@@ -1,3 +1,5 @@
+import ErrorStore from "../store/errorStore";
+
 
 export async function parseToJson(res){
     try{
@@ -7,5 +9,25 @@ export async function parseToJson(res){
     }catch (e){
         console.log(e)
     }
+}
 
+export async function ApiErrorHandler(res){
+    console.log(res)
+    const resBody = await parseToJson(res)
+    if(res.status ===400){
+        ErrorStore.setErrors(resBody)
+        return res.status
+    }
+    if(res.status === 500){
+        console.log("internal server error")
+        window.location.href="/serverIsDown"
+        return
+    }
+    if(res.status === 404){
+        window.location.href="/notFound"
+        return
+    }
+    if(res.status === 200){
+        return resBody
+    }
 }

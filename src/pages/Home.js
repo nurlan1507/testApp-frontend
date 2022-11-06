@@ -8,7 +8,7 @@ const Home=observer(()=>{
     var user = toJS(UserSessionManager.user)
     return (
         <>
-            {user.Username}
+            {user.username}
         </>
         )
 })

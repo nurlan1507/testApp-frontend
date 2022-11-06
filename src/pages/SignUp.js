@@ -8,7 +8,6 @@ import {toJS} from "mobx";
 import ErrorStore from "../store/errorStore";
 import UserSessionManager from "../store/userStore";
 export default function SignUp(){
-    const navigate = useNavigate()
     const [email, setEmail ]= useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -16,6 +15,7 @@ export default function SignUp(){
     const [errMap, setErrMap] = useState(toJS(ErrorStore.errors))
     useEffect(()=>{
         setErrMap(toJS(ErrorStore.errors))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[toJS(ErrorStore.errors)])
     return(
         <div className={'w-full  bg-main-bg dark:db-main-dark-bg  h-full' } style={{paddingTop:"100px"}} >

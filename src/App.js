@@ -8,7 +8,8 @@ import Home from './pages/Home'
 import SideBar from './componets/SideBar'
 import CreateTest from './pages/CreateTest'
 import MenuIcon from "@mui/icons-material/Menu";
-
+import InitialServerError from "./pages/InitialServerError";
+import NotFound from "./pages/NotFound";
 
 const App=observer(()=> {
     const currentMode = 'light'
@@ -26,6 +27,8 @@ const App=observer(()=> {
                                 <Route path={'/signUp'} element={<SignUp/>}/>
                                 <Route path={'/signIn'} element={<SignIn/>}/>
                                 <Route path={'/createTest'} element={<CreateTest/>}/>
+                                <Route path={'/notFound'} element={<NotFound/>}/>
+                                <Route path={'/serverError'} element={<InitialServerError/>}/>
                             </Routes>
                         </div>
                     </div>

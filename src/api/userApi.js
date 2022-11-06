@@ -55,10 +55,11 @@ export const singUpApi=async(email, username,password, repeatPassword)=>{
 }
 export const RefreshAccessToken =async()=>{
     const res = await fetch("http://localhost:4000/getNewAccessToken")
+    console.log(res)
+    console.log(await parseToJson(res))
     if (res.status !== 200){
-        window.location.href = "/signIn"
+        // window.location.href='/signUp'
         return
     }
-    console.log(res)
     return await parseToJson(res)
 }

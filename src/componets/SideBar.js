@@ -14,7 +14,7 @@ const SideBar= observer(()=>{
            {/*<button className={'w-fit fixed left-20 bg-transparent'} onClick={()=>{HtmlStates.toggleActiveMenu()}}><CloseIcon/></button>*/}
             <div className={"w-full dark:bg-secondary-dark-bg bg-main-db h-fit p-10"}>
                <img src={require('../assets/avatar.png')} alt={'user avatar'} className={'w-full'}/>
-               <h3 className={'w-full text-center'}>{user.Username}</h3>
+               <h3 className={'w-full text-center'}>{}</h3>
            </div>
             <ul className={"mt-2 pl-7"}>
                 {sideBarStudent.map((item)=>{

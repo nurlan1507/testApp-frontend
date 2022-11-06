@@ -4,14 +4,13 @@ import HtmlStates from '../store/htmlStates'
 import UserSessionManager from "../store/userStore";
 import {toJS} from 'mobx'
 import {sideBarStudent} from '../data/sideBar'
-import CloseIcon from '@mui/icons-material/Close';
 import {Link} from 'react-router-dom'
 
 const SideBar= observer(()=>{
     const activeMenu = HtmlStates.activeMenu
     const user = toJS(UserSessionManager.user)
     return(
-        activeMenu && <div className={"flex-col mobile:w-72  w-3/4 absolute mobile:relative dark:bg-secondary-dark-bg bg-light-gray h-100 "}>
+        activeMenu && <div className={"flex-col mobile:w-72  w-full  absolute mobile:relative dark:bg-secondary-dark-bg bg-light-gray h-100 "}>
            {/*<button className={'w-fit fixed left-20 bg-transparent'} onClick={()=>{HtmlStates.toggleActiveMenu()}}><CloseIcon/></button>*/}
             <div className={"w-full dark:bg-secondary-dark-bg bg-main-db h-fit p-10"}>
                <img src={require('../assets/avatar.png')} alt={'user avatar'} className={'w-full'}/>

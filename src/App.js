@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import Home from './pages/Home'
 import SideBar from './componets/SideBar'
+import CreateTest from './pages/CreateTest'
 import MenuIcon from "@mui/icons-material/Menu";
 
 
@@ -18,17 +19,16 @@ const App=observer(()=> {
                 <BrowserRouter>
                     <div className={'flex w-full'}>
                         <SideBar/>
-
-                        <div className={`w-full dark:bg-main-dark bg-main-bg min-h-screen `}>
+                        <div className={`mobile:w-full mobile:block hidden   dark:bg-main-dark bg-main-bg min-h-screen `}>
                             <button type={"button"} onClick={()=>HtmlStates.toggleActiveMenu()} className={"p-2 bg-submit-blue"}><MenuIcon/></button>
                             <Routes>
                                 <Route path={'/home'} element={<Home/>}/>
                                 <Route path={'/signUp'} element={<SignUp/>}/>
                                 <Route path={'/signIn'} element={<SignIn/>}/>
+                                <Route path={'/createTest'} element={<CreateTest/>}/>
                             </Routes>
                         </div>
                     </div>
-
                 </BrowserRouter>
             </div>
 

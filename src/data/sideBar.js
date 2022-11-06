@@ -16,14 +16,16 @@ export const sideBarTeacher =
             title: "Setting",
             link:"/settings"
         },
-
     ]
-
 export const sideBarStudent =
     [
         {
             title:"My Quizes",
             link:"/myQuizes"
+        },
+        {
+          title:"My class",
+          link:"/myClass"
         },
         {
             title:"Search",

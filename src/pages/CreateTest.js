@@ -32,7 +32,7 @@ const CreateTest=observer(()=>{
                            </InputAdornment>
                        }
                        />
-                       {errMap.get("email") && <Alert severity="error" className={'p-0'}>{errMap.get("email")}</Alert>}
+                       {errMap.get("title") && <Alert severity="error" className={'p-0'}>{errMap.get("title")}</Alert>}
                    </div>
                    <div className={"mt-8 w-full"}>
                        <InputLabel htmlFor='title'>Description:</InputLabel>
@@ -41,7 +41,7 @@ const CreateTest=observer(()=>{
                                           className={'w-full'}
                                           onChange={(e)=>{setDescription(e.target.value)}}
                             />
-                       {errMap.get("email") && <Alert severity="error" className={'p-0'}>{errMap.get("email")}</Alert>}
+                       {errMap.get("description") && <Alert severity="error" className={'p-0'}>{errMap.get("description")}</Alert>}
                    </div>
                    <div className={' w-full flex justify-between flex-wrap'}>
                        <div className={'mt-8'}>

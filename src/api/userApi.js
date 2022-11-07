@@ -11,6 +11,8 @@ export const signInApi =async(email,password)=>{
         mode:"cors",
         body: JSON.stringify(body)
     })
+
+    console.log(res)
     if (res.status===400){
         let errors = await parseToJson(res)
         ErrorStore.setErrors(errors)

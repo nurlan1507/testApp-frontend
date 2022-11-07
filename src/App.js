@@ -10,7 +10,8 @@ import CreateTest from './pages/CreateTest'
 import MenuIcon from "@mui/icons-material/Menu";
 import InitialServerError from "./pages/InitialServerError";
 import NotFound from "./pages/NotFound";
-
+import Navbar from "./componets/Navbar"
+import EditTest from "./pages/EditTest";
 const App=observer(()=> {
     const currentMode = 'light'
     const activeMenu = HtmlStates.activeMenu
@@ -21,7 +22,7 @@ const App=observer(()=> {
                     <div className={'flex w-full'}>
                         <SideBar/>
                         <div className={`mobile:w-full mobile:block hidden   dark:bg-main-dark bg-main-bg min-h-screen `}>
-                            <button type={"button"} onClick={()=>HtmlStates.toggleActiveMenu()} className={"p-2 bg-submit-blue"}><MenuIcon/></button>
+                           <Navbar/>
                             <Routes>
                                 <Route path={'/home'} element={<Home/>}/>
                                 <Route path={'/signUp'} element={<SignUp/>}/>
@@ -29,6 +30,7 @@ const App=observer(()=> {
                                 <Route path={'/createTest'} element={<CreateTest/>}/>
                                 <Route path={'/notFound'} element={<NotFound/>}/>
                                 <Route path={'/serverError'} element={<InitialServerError/>}/>
+                                <Route path={'/editTest/'} element={<EditTest/>}/>
                             </Routes>
                         </div>
                     </div>

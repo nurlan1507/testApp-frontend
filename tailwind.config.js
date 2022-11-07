@@ -21,8 +21,12 @@ module.exports = {
         'secondary-dark-bg': '#33373E',
         'light-gray': '#F7F7F7',
         'submit-blue':'#376cfa',
+        'listItemDark-bg':'#1B1B1CFF',
+        'listItemHover-bg':"#7E7D7DFF",
+        'listItemDarkHover':"#abafaf",
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
-        'bg-hover':'#7E7D7DFF'
+        'bg-hover':'#7E7D7DFF',
+        'edit-test-bg': '#d7d7c1',
       },
       borderWidth: {
         1: '1px',

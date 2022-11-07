@@ -1,20 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {observer} from 'mobx-react-lite'
 import HtmlStates from '../store/htmlStates'
 import UserSessionManager from "../store/userStore";
 import {toJS} from 'mobx'
 import {sideBarStudent} from '../data/sideBar'
 import {Link} from 'react-router-dom'
-
+import {useLocation} from 'react-router-dom'
 const SideBar= observer(()=>{
-    const activeMenu = HtmlStates.activeMenu
     const user = toJS(UserSessionManager.user)
+    let activeMenu = HtmlStates.activeMenu
+    const path = useLocation()
+    if (path.pathname === '/signUp' || path.pathname==='/signIn' || path.pathname==='/editTest/'){
+        activeMenu = !activeMenu
+    }
     return(
         activeMenu && <div className={"flex-col mobile:w-72  w-full  absolute mobile:relative dark:bg-secondary-dark-bg bg-light-gray h-100 "}>
            {/*<button className={'w-fit fixed left-20 bg-transparent'} onClick={()=>{HtmlStates.toggleActiveMenu()}}><CloseIcon/></button>*/}
             <div className={"w-full dark:bg-secondary-dark-bg bg-main-db h-fit p-10"}>
                <img src={require('../assets/avatar.png')} alt={'user avatar'} className={'w-full'}/>
-               <h3 className={'w-full text-center'}>{}</h3>
+               <h3 className={'w-full text-center'}>{user.username}</h3>
            </div>
             <ul className={"mt-2 pl-7"}>
                 {sideBarStudent.map((item)=>{

@@ -12,7 +12,6 @@ export async function parseToJson(res){
 }
 
 export async function ApiErrorHandler(res){
-    console.log(res)
     const resBody = await parseToJson(res)
     if(res.status ===400){
         ErrorStore.setErrors(resBody)
@@ -28,6 +27,7 @@ export async function ApiErrorHandler(res){
         return
     }
     if(res.status === 200){
+        window.location.href=`/editTest/${resBody.Id}`
         return resBody
     }
 }

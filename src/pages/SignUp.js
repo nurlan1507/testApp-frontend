@@ -18,7 +18,7 @@ export default function SignUp(){
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[toJS(ErrorStore.errors)])
     return(
-        <div className={'w-full  bg-main-bg dark:db-main-dark-bg  h-full' } style={{paddingTop:"100px"}} >
+        <div className={'w-full  bg-main-bg dark:db-main-dark-bg h-full' } style={{paddingTop:"100px"}} >
             <div className={'w-4/5 md:w-full flex flex-col items-center  m-auto '}>
                 <h1 className={'text-center '}>Sign Up</h1>
                 <div className={'w-full md:w-full max-w-lg flex items-center flex-col'}>
@@ -62,7 +62,6 @@ export default function SignUp(){
                     </div>
                     <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} onClick={()=>UserSessionManager.signUp(email,username,password,repeatedPassword)} type={"button"}>Sign Up</button>
             </div>
-
                 </div>
         </div>
     )

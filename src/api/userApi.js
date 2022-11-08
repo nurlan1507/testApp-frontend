@@ -43,6 +43,7 @@ export const singUpApi=async(email, username,password, repeatPassword)=>{
             ErrorStore.setErrors(errors)
             return
         }else if(res.status === 500){
+            window.location.href="/serverError"
             return
         }else if(res.status===200){
             window.location.href="/home"

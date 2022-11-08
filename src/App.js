@@ -36,8 +36,6 @@ const App=observer(()=> {
                     </div>
                 </BrowserRouter>
             </div>
-
-
   );
 })
 

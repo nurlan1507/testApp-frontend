@@ -1,14 +1,16 @@
-import React, {useState, useRef, useEffect} from 'react'
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-const QuestionRadioButton=({question})=>{
+import React from 'react'
+import {observer} from 'mobx-react-lite'
+import {useEffect, useState, useRef} from "react"
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+
+const QuestionBoolean =({question})=>{
     const [correctKey, setCorrectKey] = useState('')
     const prevCorrectKeyRef = useRef()
     useEffect(()=>{
         prevCorrectKeyRef.current = correctKey
     },[correctKey])
-
     return(
         <div className={'w-full p-8 border-2 border-slate-400 bg-main-bg'}>
             <div className={'flex justify-between'}>
@@ -47,4 +49,4 @@ const QuestionRadioButton=({question})=>{
     )
 }
 
-export default QuestionRadioButton
+export default QuestionBoolean

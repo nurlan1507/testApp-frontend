@@ -1,15 +1,43 @@
 import React from 'react'
 import {editTestOptions} from '../data/quesiton'
 import { List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-const EditTestSidebar =()=>{
+import testQuestions, {InputText, MCQ, RadioButton, Boolean as BooleanQuestion} from '../store/testQuestions'
+import {observer} from 'mobx-react-lite'
+import {questionBlankets} from "../data/quesiton";
+import {toJS} from "mobx";
+const EditTestSidebar =observer(()=>{
+    const addAQuestion =(type)=>{
+        // eslint-disable-next-line default-case
+        switch (type){
+            case "Radio Buttons":
+                testQuestions.appendQuestion(new RadioButton(questionBlankets[0]))
+                console.log(toJS(testQuestions.questions))
+                break
+            case "MCQ":
+                testQuestions.appendQuestion(new MCQ(questionBlankets[3]))
+                console.log(toJS(testQuestions.questions))
+                break
+            case "Text Input":
+                testQuestions.appendQuestion(new InputText(questionBlankets[2]))
+                console.log(toJS(testQuestions.questions))
+                break
+            case "Boolean":
+                testQuestions.appendQuestion(new BooleanQuestion(questionBlankets[1]))
+                console.log(toJS(testQuestions.questions))
+                break
+        }
+
+    }
     return (
+
         <div className={'w-full min-h-screen'}>
             <List subheader={<SubHeader/>}>
-            {editTestOptions.map((item)=>{
+            {toJS(editTestOptions).map((item)=>{
                 return(
                     <ListItem key={item.type} disablePadding className={'w-full dark:bg-listItemDark-bg bg-main-bg dark:text-white h-fit'}>
-                        <ListItemButton alignItems={'center'} className={'pt-10 '} onClick={()=>{
-                            console.log(item.type)}}>
+                        <ListItemButton alignItems={'center'} className={'pt-10 '} onClick={(e)=>{
+                            addAQuestion(item.type)
+                        }}>
                             <ListItemIcon button={true} autoFocus={true}>
                                 {item.icon}
                             </ListItemIcon>
@@ -21,7 +49,7 @@ const EditTestSidebar =()=>{
             </List>
         </div>
     );
-}
+})
 
 
 const SubHeader=()=>{

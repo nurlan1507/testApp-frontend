@@ -1,3 +1,6 @@
 import React from 'react'
 
-const context = React.createContext()
+const Bars = React.createContext()
+
+
+export {Bars}

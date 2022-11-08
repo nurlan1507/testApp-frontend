@@ -27,7 +27,8 @@ module.exports = {
         'half-transparent': 'rgba(0, 0, 0, 0.5)',
         'bg-hover':'#7E7D7DFF',
         'edit-test-bg': '#d7d7c1',
-        'delete':'#B91E23'
+        'delete':'#ff000a',
+
       },
       borderWidth: {
         1: '1px',

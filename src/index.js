@@ -1,16 +1,21 @@
-import React from 'react';
+import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import {Bars} from './context'
+const Main=()=>{
+    const [activeEditQuestionSidebar, setActiveEditQuestionSidebar] = useState(false)
+    const [question, setQuestion] = useState(null)
+    return(
+        <Bars.Provider value={{activeEditQuestionSidebar,setActiveEditQuestionSidebar,question,setQuestion}}>
+            <App/>
+        </Bars.Provider>
+    )
+}
 
-const Context = React.createContext()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Context.Provider value={{
-        editQuestionSidebar: false
-    }}>
-        <App />
-    </Context.Provider>
+    <Main/>
 );
 
 

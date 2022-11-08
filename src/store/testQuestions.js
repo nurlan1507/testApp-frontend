@@ -3,10 +3,18 @@ import QuestionRadioButton from "../componets/QuestionRadioButton";
 import QuestionMCQ from '../componets/QuestionMCQ'
 import QuestionInputText from "../componets/QuestionInputText";
 import QuestionBoolean from "../componets/QuestionBoolean"
+
+import EditInputText from "../componets/questionEditTools/EditInputText";
+import EditBoolean from "../componets/questionEditTools/EditBoolean";
+import EditMCQ from "../componets/questionEditTools/EditMVQ"
+import EditInputRadio from "../componets/questionEditTools/EditRadio";
 class Question{
     changeData(){}
     draw(){}
     changeCorrect(key){}
+    output(){}
+    drawEditingMenu(){}
+    saveChanges(newQuestion){}
 }
 
 
@@ -22,15 +30,23 @@ class MCQ extends Question{
         this.description = question.description
         this.answers = question.answers
     }
+    drawEditingMenu() {
+        return <EditMCQ question={this}></EditMCQ>
+    }
 
     changeDate(){
 
     }
     draw() {
-        console.log(this)
         return <QuestionMCQ question={this}/>
     }
     changeCorrect(key, previousKey) {
+
+    }
+    output() {
+
+    }
+    saveChanges(newQuestion) {
 
     }
 }
@@ -49,18 +65,28 @@ class RadioButton extends Question{
     changeData() {
 
     }
+    drawEditingMenu() {
+        return <EditInputRadio question={this}/>
+    }
 
     output(){
-        console.log(this)
+
     }
     changeCorrect(key, previousKey) {
-        this.answers[previousKey].correct = false
-        this.answers[key].correct = (this.answers[key].correct !== true)
+        if (previousKey){
+            this.answers[previousKey].correct = false
+            this.answers[key].correct = (this.answers[key].correct !== true)
+            return
+        }
+        this.answers[key].correct = this.answers[key].correct!==true
     }
 
     draw(){
         console.log(this)
         return <QuestionRadioButton question={this}/>
+    }
+    saveChanges(newQuestion) {
+
     }
 }
 
@@ -76,6 +102,10 @@ class Boolean extends Question{
         this.answers = question.answers
         this.point = question.point
     }
+    drawEditingMenu() {
+        return <EditBoolean question={this}/>
+    }
+
     changeData() {
 
     }
@@ -84,9 +114,23 @@ class Boolean extends Question{
         return <QuestionBoolean question={this}/>
     }
     changeCorrect(key, previousKey) {
+        if (previousKey){
+            this.answers[previousKey].correct = false
+            this.answers[key].correct = (this.answers[key].correct !== true)
+            return
+        }
+
+        this.answers[key].correct = this.answers[key].correct!==true
+    }
+    output() {
 
     }
 
+    saveChanges(newQuestion) {
+        this.answers = newQuestion.answers
+        this.description = newQuestion.description
+        this.point = newQuestion.point
+    }
 }
 
 class InputText extends Question{
@@ -101,6 +145,14 @@ class InputText extends Question{
         this.correctAnswer = question.correctAnswer
         this.point = question.point
     }
+    drawEditingMenu() {
+        return <EditInputText question={this}/>
+    }
+
+    output() {
+
+    }
+
     draw() {
         return <QuestionInputText question={this}/>
     }
@@ -109,6 +161,11 @@ class InputText extends Question{
     }
     changeData() {
 
+    }
+    saveChanges(newQuestion) {
+        this.correctAnswer = newQuestion.correctAnswer
+        this.description = newQuestion.description
+        this.point = newQuestion.point
     }
 }
 
@@ -127,7 +184,6 @@ class testQuestions{
         if (this.questions) {
             this.questions.push(question)
         }
-        console.log('new question has been added')
     }
 }
 

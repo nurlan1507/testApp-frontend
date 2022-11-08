@@ -1,20 +1,25 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, useContext} from 'react'
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import {Bars} from "../context";
 const QuestionRadioButton=({question})=>{
-    const [correctKey, setCorrectKey] = useState('')
+    const [correctKey, setCorrectKey] = useState(null)
     const prevCorrectKeyRef = useRef()
     useEffect(()=>{
         prevCorrectKeyRef.current = correctKey
     },[correctKey])
-
+    const setBar = useContext(Bars).setActiveEditQuestionSidebar
+    const setQuestion = useContext(Bars).setQuestion
     return(
-        <div className={'w-full p-8 border-2 border-slate-400 bg-main-bg'}>
+        <div className={'w-full p-8 border-2 border-slate-400 bg-main-bg '}>
             <div className={'flex justify-between'}>
                 <h3 className={'text-gray text-lg font-light'}>RadioButton</h3>
                 <div className={'grid gap-4 grid-cols-2 '}>
-                    <button className={'p-1 bg-submit-blue rounded-lg '}>
+                    <button className={'p-1 bg-submit-blue rounded-lg '}
+                    onClick={()=>{
+                        setQuestion(question)
+                        setBar(true)}}>
                         <EditIcon/>
                     </button>
                     <button className={'p-1 bg-delete rounded-lg'}>
@@ -26,7 +31,7 @@ const QuestionRadioButton=({question})=>{
                 <FormLabel>
                     <p className={'text-gray text-medium font-light '}>{question.description}</p>
                 </FormLabel>
-                <hr style={{color:"#000"}} className={'mt-2'}></hr>
+                <hr style={{color:"#000"}} className={'mt-2'}/>
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="female"

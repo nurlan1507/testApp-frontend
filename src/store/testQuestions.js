@@ -14,7 +14,8 @@ class Question{
     changeCorrect(key){}
     output(){}
     drawEditingMenu(){}
-    saveChanges(newQuestion){}
+    resetChanges(newQuestion){}
+    delete(){}
 }
 
 
@@ -24,6 +25,7 @@ class MCQ extends Question{
     description
     answers={}
     point
+    order
     constructor(question) {
         super();
         this.type =question.type
@@ -41,12 +43,12 @@ class MCQ extends Question{
         return <QuestionMCQ question={this}/>
     }
     changeCorrect(key, previousKey) {
-
+        this.answers[key].correct = this.answers[key].correct!==true
     }
     output() {
 
     }
-    saveChanges(newQuestion) {
+    resetChanges(newQuestion) {
 
     }
 }
@@ -55,6 +57,7 @@ class RadioButton extends Question{
     description
     answers={}
     point
+    order
     constructor(question) {
         super();
         this.type =question.type
@@ -73,6 +76,7 @@ class RadioButton extends Question{
 
     }
     changeCorrect(key, previousKey) {
+        console.log("RADIO")
         if (previousKey){
             this.answers[previousKey].correct = false
             this.answers[key].correct = (this.answers[key].correct !== true)
@@ -85,8 +89,10 @@ class RadioButton extends Question{
         console.log(this)
         return <QuestionRadioButton question={this}/>
     }
-    saveChanges(newQuestion) {
-
+    resetChanges(newQuestion) {
+        this.type = newQuestion.type
+        this.answers = newQuestion.answers
+        this.description = newQuestion.description
     }
 }
 
@@ -95,6 +101,7 @@ class Boolean extends Question{
     description
     correctAnswer
     point
+    order
     constructor(question) {
         super()
         this.type = question.type
@@ -114,19 +121,19 @@ class Boolean extends Question{
         return <QuestionBoolean question={this}/>
     }
     changeCorrect(key, previousKey) {
+        console.log("BOOLEan")
         if (previousKey){
             this.answers[previousKey].correct = false
             this.answers[key].correct = (this.answers[key].correct !== true)
             return
         }
-
         this.answers[key].correct = this.answers[key].correct!==true
     }
     output() {
 
     }
 
-    saveChanges(newQuestion) {
+    resetChanges(newQuestion) {
         this.answers = newQuestion.answers
         this.description = newQuestion.description
         this.point = newQuestion.point
@@ -138,11 +145,12 @@ class InputText extends Question{
     description
     correctAnswer
     point
+    order
     constructor(question) {
         super()
         this.type = question.type
         this.description = question.description
-        this.correctAnswer = question.correctAnswer
+        this.correctAnswer = question.correctValue
         this.point = question.point
     }
     drawEditingMenu() {
@@ -162,7 +170,7 @@ class InputText extends Question{
     changeData() {
 
     }
-    saveChanges(newQuestion) {
+    resetChanges(newQuestion) {
         this.correctAnswer = newQuestion.correctAnswer
         this.description = newQuestion.description
         this.point = newQuestion.point
@@ -184,6 +192,9 @@ class testQuestions{
         if (this.questions) {
             this.questions.push(question)
         }
+    }
+    deleteQuestion(ind){
+        this.questions.splice(ind,1)
     }
 }
 

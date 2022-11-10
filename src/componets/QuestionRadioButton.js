@@ -12,7 +12,7 @@ const QuestionRadioButton=({question})=>{
     const setBar = useContext(Bars).setActiveEditQuestionSidebar
     const setQuestion = useContext(Bars).setQuestion
     return(
-        <div className={'w-full p-8 border-2 border-slate-400 bg-main-bg '}>
+        <div className={'w-full p-8 border-2 border-slate-400 bg-main-bg mt-4 '}>
             <div className={'flex justify-between'}>
                 <h3 className={'text-gray text-lg font-light'}>RadioButton</h3>
                 <div className={'grid gap-4 grid-cols-2 '}>
@@ -40,14 +40,17 @@ const QuestionRadioButton=({question})=>{
                     <div  className={'grid gap-cols-gap-4 grid-cols-2 h-fit p-1'}>
                         {Object.keys(question.answers).map((key)=>{
                             return(
-                                <FormControlLabel value={key} control={<Radio />} label={`${key}: ${question.answers[key].value}`}   onChange={(e)=>{setCorrectKey(e.target.value);
+                                <FormControlLabel value={key} control={<Radio checked={question.answers[key].correct} />} label={`${key}: ${question.answers[key].value}`}   onChange={(e)=>{setCorrectKey(e.target.value);
                                     console.log(prevCorrectKeyRef);question.changeCorrect(key,prevCorrectKeyRef.current); question.output()}}/>
                             )
                         })}
                     </div>
                 </RadioGroup>
-                <div className={'text-gray text-medium'}>Point:{question.point}</div>
+                <p className={'text-gray text-medium'}>Point:{question.point}</p>
             </div>
+            {/*<button className={'w-1/4 bg-submit-blue border-2 p-1 mt-2 rounded-lg text-white active:shadow-lg transition duration-400 ease-in hover: shadow-md transition duration-400 brightness-150 ease-in'} onClick={()=>{*/}
+            {/*    console.log(question)*/}
+            {/*}}>Save</button>*/}
         </div>
     )
 }

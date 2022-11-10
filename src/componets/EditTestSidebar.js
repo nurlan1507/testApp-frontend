@@ -31,7 +31,7 @@ const EditTestSidebar =observer(()=>{
     }
     return (
 
-        <div className={'w-full min-h-screen'}>
+        <div className={'w-1/4 fixed top-0 left-0'}>
             <List subheader={<SubHeader/>}>
             {toJS(editTestOptions).map((item)=>{
                 return(

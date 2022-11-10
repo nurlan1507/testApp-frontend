@@ -3,7 +3,7 @@ import {observer} from 'mobx-react-lite'
 import {useEffect, useState, useRef} from "react"
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Input, InputLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import {Bars} from "../context";
 
 const QuestionBoolean =({question})=>{
@@ -25,7 +25,11 @@ const QuestionBoolean =({question})=>{
                         setBar(true)}}>
                         <EditIcon/>
                     </button>
-                    <button className={'p-1 bg-delete rounded-lg'}>
+                    <button className={'p-1 bg-delete rounded-lg'}
+                        onClick={()=>{
+
+                        }}
+                    >
                         <DeleteIcon/>
                     </button>
                 </div>
@@ -42,8 +46,12 @@ const QuestionBoolean =({question})=>{
                             )
                         })}
                     </div>
-                <div className={'text-gray text-medium'}>Point:{question.point}</div>
+
             </div>
+
+            {/*<button className={'w-1/4 bg-submit-blue border-2 p-1 mt-2 rounded-lg text-white active:shadow-lg transition duration-400 ease-in hover: shadow-md transition duration-400 brightness-150 ease-in'} onClick={()=>{*/}
+            {/*    console.log(question)*/}
+            {/*}}>Save</button>*/}
         </div>
     )
 }

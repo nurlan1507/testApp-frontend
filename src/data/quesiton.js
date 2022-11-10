@@ -37,7 +37,7 @@ export const questionBlankets =[
             },
             B:{
                 value: false,
-                correct: true
+                correct: false
             }
         },
         point:1
@@ -45,7 +45,7 @@ export const questionBlankets =[
     {
         type:"Input text",
         description: "add a question description description",
-        correctValue:"",
+        correctValue:"asdasdasdasdasdasdasda",
         point: 1,
     },
     {

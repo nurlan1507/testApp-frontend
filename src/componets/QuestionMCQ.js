@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Input, InputLabel, Radio, RadioGroup} from "@mui/material";
 import {CheckBox} from "@mui/icons-material";
 
 import {Bars} from "../context";
@@ -22,7 +22,9 @@ const QuestionMCQ =({question})=>{
                     >
                         <EditIcon/>
                     </button>
-                    <button className={'p-1 bg-delete rounded-lg'}>
+                    <button className={'p-1 bg-delete rounded-lg'} onClick={()=>{
+
+                    }}>
                         <DeleteIcon/>
                     </button>
                 </div>
@@ -32,20 +34,17 @@ const QuestionMCQ =({question})=>{
                     <p className={'text-gray text-medium font-light '}>{question.description}</p>
                 </FormLabel>
                 <hr style={{color:"#000"}} className={'mt-2'}/>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="female"
-                    name="radio-buttons-group"
-                >
                     <div className={'grid gap-cols-gap-4 grid-cols-2 h-fit p-1'}>
-                        {Object.values(question.answers).map((item)=>{
+                        {Object.keys(question.answers).map((key)=>{
                             return(
-                                <FormControlLabel value={item.value} control={<CheckBox />} label={item.value}/>
+                                <FormControlLabel value={question.answers[key].value} control={<Radio checked={question.answers[key].correct} onChange={()=>{}} />} label={question.answers[key].value}/>
                             )
                         })}
                     </div>
-                </RadioGroup>
             </div>
+            {/*<button className={'w-1/4 bg-submit-blue border-2 p-1 mt-5 rounded-lg text-white active:shadow-lg transition duration-400 ease-in hover: shadow-md transition duration-400 brightness-150 ease-in'} onClick={()=>{*/}
+            {/*    console.log(question)*/}
+            {/*}}>Save</button>*/}
         </div>
     )
 }

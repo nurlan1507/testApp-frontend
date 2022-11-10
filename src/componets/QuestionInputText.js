@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {FormControlLabel, FormLabel, RadioGroup} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Input, InputLabel, RadioGroup} from "@mui/material";
 import {CheckBox} from "@mui/icons-material";
 
 import {Bars} from "../context";
@@ -29,9 +29,12 @@ const QuestionInputText =({question})=>{
                     <p className={'text-gray text-medium font-light '}>{question.description}</p>
                 </FormLabel>
                 <hr style={{color:"#000"}} className={'mt-2'}/>
-                <p className={'text-gray text-medium font-light'}>{question.correctValue}</p>
+                <p className={'text-gray text-medium font-light mt-3'}>Correct answer: {question.correctAnswer}</p>
                 <p className={'text-medium font-light'}>point :{question.point}</p>
             </div>
+            {/*<button className={'w-1/4 bg-submit-blue border-2 p-1 mt-2 rounded-lg text-white active:shadow-lg transition duration-400 ease-in hover: shadow-md transition duration-400 brightness-150 ease-in'} onClick={()=>{*/}
+            {/*    console.log(question)*/}
+            {/*}}>Save</button>*/}
         </div>
     )
 }

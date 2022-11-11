@@ -3,8 +3,10 @@ import {observer} from 'mobx-react-lite'
 import {useEffect, useState, useRef} from "react"
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {FormControl, FormControlLabel, FormLabel, Input, InputLabel, Radio, RadioGroup, TextField} from "@mui/material";
+import {Alert, FormControlLabel, FormLabel, Radio} from "@mui/material";
+import ErrorStore from "../store/errorStore";
 import {Bars} from "../context";
+import {toJS} from "mobx";
 
 const QuestionBoolean =({question})=>{
     const [correctKey, setCorrectKey] = useState('')
@@ -46,8 +48,8 @@ const QuestionBoolean =({question})=>{
                             )
                         })}
                     </div>
-
             </div>
+            {/*{toJS(ErrorStore.errors.get(`question-description-${this.order-1}`)) &&<Alert severity="error" className={'p-0 h-fit m-0'}>{toJS(ErrorStore.errors.get(`question-description-${this.order-1}`))}</Alert>}*/}
 
             {/*<button className={'w-1/4 bg-submit-blue border-2 p-1 mt-2 rounded-lg text-white active:shadow-lg transition duration-400 ease-in hover: shadow-md transition duration-400 brightness-150 ease-in'} onClick={()=>{*/}
             {/*    console.log(question)*/}

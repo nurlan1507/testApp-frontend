@@ -29,10 +29,10 @@ const EditInputRadio=({question})=>{
                 {Object.keys(question.answers).map((key)=>{
                     return(
                     <>
-                        <div className={' p-0 col-start-1 col-end-5  '} key={key.value}>
-                            <TextareaAutosize   minRows={2} className={'w-full text-light text-medium p-0 h-full border-2 bg-main-bg'} style={{"height":"100%"}} placeholder={question.answers[key].value} onChange={()=>{}}/>
+                        <div className={' p-0 col-start-1 col-end-5  '} >
+                            <TextareaAutosize   minRows={2} className={'w-full text-light text-medium p-0 h-full border-2 bg-main-bg'} style={{"height":"100%"}} placeholder={question.answers[key].value} onInput={(e)=>{question.answers[key].value= e.target.value}}/>
                         </div>
-                        <div className={'p-0 col-start-5 col-end-6  border-2 flex justify-center items-center'} key={key.value}>
+                        <div className={'p-0 col-start-5 col-end-6  border-2 flex justify-center items-center'} >
                             <Radio checked={question.answers[key].correct} value={question.answers[key].value} onClick={()=>{ console.log("ADSIUHASDASDASDASDASDASDASDASDASDASDASDASDASDASDHHASDHSDH")
                                 setCorrectAnswer(key) ;
                                 console.log(correctAnswer); question.changeCorrect(key,ref.current)}} inputProps={{style:{width:"5px"}}} onChange={(e)=>{

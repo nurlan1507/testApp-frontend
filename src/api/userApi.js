@@ -52,9 +52,6 @@ export const singUpApi=async(email, username,password, repeatPassword)=>{
     }catch (e){
         return e
     }
-
-
-
 }
 export const RefreshAccessToken =async()=>{
     const res = await fetch("http://localhost:4000/getNewAccessToken")
@@ -66,3 +63,4 @@ export const RefreshAccessToken =async()=>{
     }
     return await parseToJson(res)
 }
+

@@ -33,6 +33,7 @@ const QuestionRadioButton=({question})=>{
                 </FormLabel>
                 <hr style={{color:"#000"}} className={'mt-2'}/>
                 <RadioGroup
+                    aria-disabled={true}
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="female"
                     name="radio-buttons-group"
@@ -40,7 +41,7 @@ const QuestionRadioButton=({question})=>{
                     <div  className={'grid gap-cols-gap-4 grid-cols-2 h-fit p-1'}>
                         {Object.keys(question.answers).map((key)=>{
                             return(
-                                <FormControlLabel value={key} control={<Radio checked={question.answers[key].correct} />} label={`${key}: ${question.answers[key].value}`}   onChange={(e)=>{setCorrectKey(e.target.value);
+                                <FormControlLabel value={key} control={<Radio disabled={true} checked={question.answers[key].correct} />} label={`${key}: ${question.answers[key].value}`}   onChange={(e)=>{setCorrectKey(e.target.value);
                                     console.log(prevCorrectKeyRef);question.changeCorrect(key,prevCorrectKeyRef.current); question.output()}}/>
                             )
                         })}

@@ -4,11 +4,11 @@ import {observer} from 'mobx-react-lite'
 import testQuestions from "../store/testQuestions";
 import EditQuestionSideBar from "../componets/EditQuestionSideBar"
 import {Bars} from "../context";
+import {useParams} from 'react-router-dom'
 import {toJS} from "mobx";
 const EditTest =observer(()=>{
+    const {id} = useParams()
     const context = useContext(Bars)
-
-    console.log(context.activeEditQuestionSidebar+"ASDSASDasdas")
     return(
             <div className={'flex w-full'}>
                 <div className={'w-1/4'}>
@@ -21,8 +21,7 @@ const EditTest =observer(()=>{
                         })}
                     </div>
                     <div className={'w-full pt-3'}>
-                        <button className={'w-full bg-submit-blue p-2 text-white' } onClick={()=>{
-                            console.log(toJS(testQuestions.questions))}}>Save Test!</button>
+                        <button className={'w-full bg-submit-blue p-2 text-white' } type={"button"} onClick={()=>testQuestions.saveTest(id)}>Save Test!</button>
                     </div>
                 </div>
                 <div className={`${context.activeEditQuestionSidebar?'fixed ':'hidden'} mobile:w-full w-full fixed mobile:right-0 right-0 top-0 `}>

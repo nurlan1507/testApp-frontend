@@ -24,13 +24,13 @@ const App=observer(()=> {
                         <div className={`mobile:w-full mobile:block hidden   dark:bg-main-dark bg-main-bg min-h-screen `}>
                            <Navbar/>
                             <Routes>
-                                <Route path={'/home'} element={<Home/>}/>
+                                <Route path={'/home/:test'} element={<Home/>}/>
                                 <Route path={'/signUp'} element={<SignUp/>}/>
                                 <Route path={'/signIn'} element={<SignIn/>}/>
                                 <Route path={'/createTest'} element={<CreateTest/>}/>
                                 <Route path={'/notFound'} element={<NotFound/>}/>
                                 <Route path={'/serverError'} element={<InitialServerError/>}/>
-                                <Route path={'/editTest/'} element={<EditTest/>}/>
+                                <Route path={'/editTest/:id'} element={<EditTest/>}/>
                             </Routes>
                         </div>
                     </div>

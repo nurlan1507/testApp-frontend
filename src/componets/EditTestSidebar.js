@@ -11,19 +11,19 @@ const EditTestSidebar =observer(()=>{
         // eslint-disable-next-line default-case
         switch (type){
             case "Radio Buttons":
-                testQuestions.appendQuestion(new RadioButton(questionBlankets[0]))
+                testQuestions.appendQuestion(new RadioButton(JSON.parse(JSON.stringify(questionBlankets[0]))))
                 console.log(toJS(testQuestions.questions))
                 break
             case "MCQ":
-                testQuestions.appendQuestion(new MCQ(questionBlankets[3]))
+                testQuestions.appendQuestion(new MCQ( JSON.parse(JSON.stringify(questionBlankets[3]))))
                 console.log(toJS(testQuestions.questions))
                 break
             case "Text Input":
-                testQuestions.appendQuestion(new InputText(questionBlankets[2]))
+                testQuestions.appendQuestion(new InputText( JSON.parse(JSON.stringify(questionBlankets[2]))))
                 console.log(toJS(testQuestions.questions))
                 break
             case "Boolean":
-                testQuestions.appendQuestion(new BooleanQuestion(questionBlankets[1]))
+                testQuestions.appendQuestion(new BooleanQuestion( JSON.parse(JSON.stringify(questionBlankets[1]))))
                 console.log(toJS(testQuestions.questions))
                 break
         }

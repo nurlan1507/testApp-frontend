@@ -35,11 +35,14 @@ const QuestionMCQ =({question})=>{
                 </FormLabel>
                 <hr style={{color:"#000"}} className={'mt-2'}/>
                     <div className={'grid gap-cols-gap-4 grid-cols-2 h-fit p-1'}>
-                        {Object.keys(question.answers).map((key)=>{
-                            return(
-                                <FormControlLabel value={question.answers[key].value} control={<Radio checked={question.answers[key].correct} onChange={()=>{}} />} label={question.answers[key].value}/>
-                            )
-                        })}
+                        <FormControl>
+                            {Object.keys(question.answers).map((key)=>{
+                                return(
+                                    <FormControlLabel value={question.answers[key].value} control={<Radio checked={question.answers[key].correct} onChange={()=>{}} />} label={question.answers[key].value}/>
+                                )
+                            })}
+                        </FormControl>
+
                     </div>
             </div>
             {/*<button className={'w-1/4 bg-submit-blue border-2 p-1 mt-5 rounded-lg text-white active:shadow-lg transition duration-400 ease-in hover: shadow-md transition duration-400 brightness-150 ease-in'} onClick={()=>{*/}

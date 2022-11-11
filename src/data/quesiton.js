@@ -32,11 +32,11 @@ export const questionBlankets =[
         description: "add a question description",
         answers:{
             A:{
-                value: true,
+                value: "True",
                 correct: false
             },
             B:{
-                value: false,
+                value: "False",
                 correct: false
             }
         },

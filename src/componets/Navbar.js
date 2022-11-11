@@ -6,7 +6,7 @@ import {useLocation} from 'react-router-dom'
 const Navbar=observer(()=>{
     const path = useLocation()
     let hide = false
-    if (path.pathname === '/signUp' || path.pathname==='/signIn' || path.pathname==='/editTest/'){
+    if (path.pathname === '/signUp' || path.pathname==='/signIn' || path.pathname==='/editTest/23'){
         hide = true
     }
     return(

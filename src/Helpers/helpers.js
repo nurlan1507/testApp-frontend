@@ -12,22 +12,18 @@ export async function parseToJson(res){
 }
 
 export async function ApiErrorHandler(res){
-    const resBody = await parseToJson(res)
     if(res.status ===400){
-        ErrorStore.setErrors(resBody)
-        return res.status
+        ErrorStore.setErrors(res)
+        return res
     }
     if(res.status === 500){
         console.log("internal server error")
         window.location.href="/serverIsDown"
-        return
+        return res
     }
     if(res.status === 404){
         window.location.href="/notFound"
-        return
+        return res
     }
-    if(res.status === 200){
-        window.location.href=`/editTest/${resBody.Id}`
-        return resBody
-    }
+    return res
 }

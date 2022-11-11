@@ -3,11 +3,14 @@ import QuestionRadioButton from "../componets/QuestionRadioButton";
 import QuestionMCQ from '../componets/QuestionMCQ'
 import QuestionInputText from "../componets/QuestionInputText";
 import QuestionBoolean from "../componets/QuestionBoolean"
-
+import {questionBlankets} from "../data/quesiton";
 import EditInputText from "../componets/questionEditTools/EditInputText";
 import EditBoolean from "../componets/questionEditTools/EditBoolean";
 import EditMCQ from "../componets/questionEditTools/EditMVQ"
 import EditInputRadio from "../componets/questionEditTools/EditRadio";
+import {toJS} from 'mobx'
+import {saveTestQuestions} from "../api/testApi";
+
 class Question{
     changeData(){}
     draw(){}
@@ -181,8 +184,11 @@ class InputText extends Question{
 
 class testQuestions{
     questions = null
+    aw = null
+    errors = null
     constructor(){
         this.questions =[]
+        this.errors = new Map()
         makeObservable(this,{
             questions : observable,
             appendQuestion : action,
@@ -195,6 +201,13 @@ class testQuestions{
     }
     deleteQuestion(ind){
         this.questions.splice(ind,1)
+    }
+
+    async saveTest(id){
+        console.log(toJS(this.questions))
+        console.log(questionBlankets[0])
+        const result = await saveTestQuestions(toJS(this.questions),id)
+
     }
 }
 

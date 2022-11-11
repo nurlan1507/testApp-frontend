@@ -10,7 +10,7 @@ const SideBar= observer(()=>{
     const user = toJS(UserSessionManager.user)
     let activeMenu = HtmlStates.activeMenu
     const path = useLocation()
-    if (path.pathname === '/signUp' || path.pathname==='/signIn' || path.pathname==='/editTest/'){
+    if (path.pathname === '/signUp' || path.pathname==='/signIn' || path.pathname==='/editTest/23'){
         activeMenu = !activeMenu
     }
     return(

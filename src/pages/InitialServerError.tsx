@@ -1,6 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react-lite'
-const ServerError=observer(()=>{
+const ServerError:React.FC=()=>{
     return(
         <>
             <h1>
@@ -8,6 +8,6 @@ const ServerError=observer(()=>{
             </h1>
         </>
     )
-})
+}
 
-export default ServerError
+export default observer(ServerError)

@@ -1,9 +1,5 @@
-export const sideBarTeacher =
+export const sideBarTeacher:Array<{title:string,link:string}> =
     [
-        {
-            title:"My Quizes",
-            link:"/myQuizes"
-        },
         {
             title:"Search",
             link: "/searchQuiz"
@@ -17,7 +13,10 @@ export const sideBarTeacher =
             link:"/settings"
         },
     ]
-export const sideBarStudent =
+
+
+
+export const sideBarStudent:Array<{title:string, link:string}> =
     [
         {
             title:"My Quizes",

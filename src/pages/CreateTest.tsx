@@ -1,25 +1,23 @@
 import React, {useEffect, useState} from 'react'
-import {Input, InputLabel, InputAdornment, Alert, Select, MenuItem, TextField} from '@mui/material'
+import {Input, InputLabel, InputAdornment, Alert, Select, MenuItem, TextField, FormControl} from '@mui/material'
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import {observer} from 'mobx-react-lite'
 import {toJS} from 'mobx'
-import HtmlStates from "../store/htmlStates";
-import ErrorStore from "../store/errorStore"
-import TitleIcon from '@mui/icons-material/Title';
-import testStore from '../store/testStore'
-import UserSessionManager from "../store/userStore";
-import {CreateTest as apiC} from '../api/testApi'
 
-const CreateTest=observer(()=>{
+import TitleIcon from '@mui/icons-material/Title';
+import {CreateTest as apiC} from '../api/testApi'
+import RootStore from '../store/rootStore'
+
+const CreateTest:React.FC=()=>{
     const [title,setTitle] = useState("")
     const [description, setDescription]= useState("")
-    const [group,setGroup]= useState("")
-    const [startDate, setStartDate] = useState(null)
-    const [errMap,setErrMap] = useState(toJS(ErrorStore.errors))
+    const [groupId,setGroupId]= useState("")
+    const [startDate, setStartDate] = useState<string>("")
+    const [errMap,setErrMap] = useState<Map<string,string>>(toJS(RootStore.errorStore.errors))
     useEffect(()=>{
-        setErrMap(toJS(ErrorStore.errors))
-    },[toJS(ErrorStore.errors)])
-    
+        setErrMap(toJS(RootStore.errorStore.errors))
+    },[toJS(RootStore.errorStore.errors)])
+
     return(
        <div className={`w-full flex flex-col items-center p-4` }>
                <h1 className={'text-center '}>Create a test</h1>
@@ -44,17 +42,22 @@ const CreateTest=observer(()=>{
                        {errMap.get("description") && <Alert severity="error" className={'p-0'}>{errMap.get("description")}</Alert>}
                    </div>
                    <div className={' w-full flex justify-between flex-wrap'}>
-                       <div className={'mt-8'}>
-                           <InputLabel id="demo-simple-select-label">Select group</InputLabel>
-                           <Select
-                               labelId="demo-simple-select-label"
-                               id="demo-simple-select"
-                               value={group}
-                               className={"mt-4"}
-                               onChange={(e)=>{setGroup(e.target.value)}}>
-                               <MenuItem value={"SE2102"}>SE2102</MenuItem>
-                               <MenuItem value={"SE2101"}>SE2101</MenuItem>
-                           </Select>
+                       <div className={"mt-8 w-full"}>
+                           <FormControl fullWidth>
+                               <InputLabel id="demo-simple-select-label">Group</InputLabel>
+                               <Select
+                                   labelId="demo-simple-select-label"
+                                   id="demo-simple-select"
+                                   value={groupId}
+                                   label="Age"
+                                   onChange={(e)=>{setGroupId(e.target.value);
+                                       console.log(groupId)}}
+                               >
+                                   <MenuItem value={1}>SE-2101</MenuItem>
+                                   <MenuItem value={2}>SE-2102</MenuItem>
+                                   <MenuItem value={3}>SE-2103</MenuItem>
+                               </Select>
+                           </FormControl>
                        </div>
                        <div className={'mt-8'}>
                            <InputLabel className={'mb-4'} id="start_date">Date when test starts</InputLabel>
@@ -70,11 +73,11 @@ const CreateTest=observer(()=>{
                            />
                        </div>
                    </div>
-                   <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} type={"button"} onClick={()=>apiC(title,description,group,startDate, UserSessionManager.user.userId)}>Create Test</button>
+                   <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} type={"button"} onClick={()=>{RootStore.testStore.setTest(0,title,description,groupId,"testName",2,[]);console.log(RootStore.testStore); }}>Create Test</button>
                </div>
            </div>
 
     )
 }
-)
-export default CreateTest
+//apiC(title,description,groupId,startDate,RootStore.userStore.userId)
+export default observer(CreateTest)

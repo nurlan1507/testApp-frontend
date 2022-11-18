@@ -3,21 +3,18 @@ import {Input, InputLabel, InputAdornment, Alert} from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import {observer} from "mobx-react-lite";
-import UserSessionManager from "../store/userStore";
-import ErrorStore from "../store/errorStore";
-import {toJS} from "mobx";
+import RootStore from '../store/rootStore'
+import {toJS} from 'mobx'
 
 
-
-
-const SignIn=observer(()=>{
-    const [email,setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [errMap, setErrMap] = useState(toJS(ErrorStore.errors))
+const SignIn:React.FC =()=>{
+    const [email,setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [errMap, setErrMap] = useState<Map<string,string>>(toJS(RootStore.errorStore.errors))
     useEffect(()=>{
-        setErrMap(toJS(ErrorStore.errors))
+        setErrMap(toJS(RootStore.errorStore.errors))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[toJS(ErrorStore.errors)])
+    },[toJS(RootStore.errorStore.errors)])
     return(
         <div className={'w-full bg-main-bg dark:db-main-dark-bg'}  style={{paddingTop:"100px"}}>
             <div className={'w-4/5 md:w-full flex flex-col items-center  m-auto '}>
@@ -46,12 +43,12 @@ const SignIn=observer(()=>{
                         />
                         {errMap.get("password") && <Alert severity="error" className={'p-0'}>{errMap.get("password")}</Alert>}
                     </div>
-                    <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} onClick={()=>UserSessionManager.signIn(email,password)} type={"button"}>Sign Up</button>
+                    <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} onClick={()=>RootStore.userStore.signIn(email,password)} type={"button"}>Sign Up</button>
             </div>
 
             </div>
         </div>
     )
-})
+}
 
-export default SignIn
+export default observer(SignIn)

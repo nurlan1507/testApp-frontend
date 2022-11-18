@@ -1,21 +1,24 @@
 import React,{useState} from 'react'
 import {observer} from 'mobx-react-lite'
-import HtmlStates from '../store/htmlStates'
-import UserSessionManager from "../store/userStore";
+import RoomStore from '../store/rootStore'
 import {toJS} from 'mobx'
 import {sideBarStudent} from '../data/sideBar'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
-const SideBar= observer(()=>{
-    const user = toJS(UserSessionManager.user)
-    let activeMenu = HtmlStates.activeMenu
+const SideBar:React.FC=()=>{
+    const user = toJS(RoomStore.userStore)
+    let activeMenu = RoomStore.htmlStates.activeMenu
     const path = useLocation()
-    if (path.pathname === '/signUp' || path.pathname==='/signIn' || path.pathname==='/editTest/23'){
+    let checkr = path.pathname
+    let show = checkr.split('/').includes('editTest')
+    if (path.pathname === '/signUp' || path.pathname==='/signIn' || show){
         activeMenu = !activeMenu
     }
     return(
+      <>
+      {
         activeMenu && <div className={"flex-col mobile:w-72  w-full  absolute mobile:relative dark:bg-secondary-dark-bg bg-light-gray h-100 "}>
-           {/*<button className={'w-fit fixed left-20 bg-transparent'} onClick={()=>{HtmlStates.toggleActiveMenu()}}><CloseIcon/></button>*/}
+
             <div className={"w-full dark:bg-secondary-dark-bg bg-main-db h-fit p-10"}>
                <img src={require('../assets/avatar.png')} alt={'user avatar'} className={'w-full'}/>
                <h3 className={'w-full text-center'}>{user.username}</h3>
@@ -31,8 +34,11 @@ const SideBar= observer(()=>{
                 }
             </ul>
         </div>
+      }
+      </>
+
     )
-})
+}
 
 
-export default SideBar
+export default observer(SideBar)

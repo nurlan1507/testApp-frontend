@@ -1,6 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react-lite'
-const NotFound=observer(()=>{
+const NotFound:React.FC=()=>{
     return(
         <>
             <h1>
@@ -8,6 +8,6 @@ const NotFound=observer(()=>{
             </h1>
         </>
     )
-})
+}
 
-export default NotFound
+export default observer(NotFound)

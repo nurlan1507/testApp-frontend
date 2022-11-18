@@ -2,7 +2,6 @@ import KeyboardIcon from '@mui/icons-material/Keyboard';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-import {MCQ, RadioButton,Boolean as BooleanQuestion,InputText} from "../store/testQuestions";
 export const questionBlankets =[
     {
         type:"Radio Buttons",
@@ -78,20 +77,18 @@ export const questionBlankets =[
 export const editTestOptions=[
     {
         type:"Text Input",
-        icon: <KeyboardIcon/>,
+        icon: KeyboardIcon,
     },
     {
         type:"Radio Buttons",
-        icon: <RadioButtonCheckedIcon/>,
+        icon: RadioButtonCheckedIcon,
     },
     {
         type:"Boolean",
-        icon:<DoneOutlineIcon/>,
+        icon:DoneOutlineIcon,
     },
     {
         type:"MCQ",
-        icon:<LibraryAddCheckIcon/>,
+        icon:LibraryAddCheckIcon,
     }
 ]
-
-

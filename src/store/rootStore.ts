@@ -2,11 +2,12 @@ import  {ErrorStore} from './errorStore'
 import {UserStore} from './userStore'
 import {HtmlStates} from './htmlStates'
 import {TestStore} from './testStore'
+import {observable} from 'mobx'
 class RootStore{
-  errorStore :ErrorStore;
-  userStore: UserStore;
-  htmlStates:HtmlStates;
-  testStore: TestStore;
+  @observable errorStore :ErrorStore;
+  @observable userStore: UserStore;
+  @observable htmlStates:HtmlStates;
+  @observable testStore: TestStore;
   constructor(){
     this.errorStore = new ErrorStore();
     this.userStore = new UserStore();

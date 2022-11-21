@@ -54,6 +54,7 @@ export const singUpApi=async(email:string , username:string ,password:string , r
           let errors = await parseToJson(res)
           console.log(errors)
           RootStore.errorStore.setErrors(errors)
+          console.log(  RootStore.errorStore)
           return
         }
         RootStore.errorStore.errors.set("fetchError", "Some error occured, please try againg later")

@@ -4,13 +4,14 @@ export interface IQuestion{
   answers:Map<string,IAnswer>;
   point:number;
   changeData():void;
-  // draw():React.FC;
+  draw():JSX.Element;
   changeCorrect(key:string|null,previousKey:string|null):void;
+
   // drawEditingMenu():React.FC;
 }
 export interface IAnswer{
   value:string;
-  correct :false;
+  correct :boolean;
 }
 
 export interface ITest{
@@ -19,5 +20,5 @@ export interface ITest{
   groupId:string;
   authorName:string;
   startDate:number;
-  questions:Array<IQuestion>|null;
+  questions:Array<IQuestion>;
 }

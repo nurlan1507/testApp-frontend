@@ -5,7 +5,7 @@ import {questionBlankets} from "../data/quesiton";
 import {toJS} from "mobx";
 import {editTestOptions} from '../data/quesiton'
 import RootStore from '../store/rootStore'
-import {RadioButton, MCQ} from '../store/testQuestions'
+import {RadioButton, MCQ, BooleanQuestion, InputQuestion} from '../store/testQuestions'
 const EditTestSidebar =observer(()=>{
     const addAQuestion =(type:string)=>{
         // eslint-disable-next-line default-case
@@ -15,8 +15,14 @@ const EditTestSidebar =observer(()=>{
                 break
             case "MCQ":
                 RootStore.testStore.addAQuestion(new MCQ())
+                console.log(RootStore.testStore)
                 break
-
+            case "Text Input":
+                RootStore.testStore.addAQuestion(new InputQuestion())
+                break
+            case "Boolean":
+                RootStore.testStore.addAQuestion(new BooleanQuestion())
+                break
         }
 
     }

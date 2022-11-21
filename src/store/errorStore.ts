@@ -1,18 +1,26 @@
-import {toJS, observable, action } from "mobx";
+import {toJS, observable, action,makeObservable } from "mobx";
 
-
-interface IError {
-  errors : Map<string,string>
+type Err ={
+  email:string
+  password:string
+  username:string
 }
-export class ErrorStore{
-    @observable errors = new Map<string,string>()
-    @action setErrors(IError: IError){
-        for (let key in IError.errors){
-            this.errors.set(key,IError.errors.get(key)||'')
-        }
 
+export class ErrorStore{
+    errors = new Map<string,string>()
+    setErrors(Error: Err){
+        for (const [key,value] of Object.entries(Error)){
+            console.log(value)
+            this.errors.set(key,value||'')
+        }
     }
     get getErrors(){
         return this.errors
+    }
+    constructor(){
+      makeObservable(this,{
+        errors:observable,
+        setErrors:action
+      })
     }
 }

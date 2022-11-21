@@ -12,7 +12,7 @@ interface Props{
 
 }
 
-const SignUp:React.FC<Props>=()=>{
+const SignUp:React.FC<Props>=observer(()=>{
     const [email, setEmail ]= useState<string>('')
     const [username, setUsername] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -20,6 +20,7 @@ const SignUp:React.FC<Props>=()=>{
     const [repeatedPassword, setRepeatedPassword] = useState<string>('')
     const [errMap, setErrMap] = useState(toJS(RootStore.errorStore.errors))
     useEffect(()=>{
+        console.log(RootStore.errorStore.errors)
         setErrMap(RootStore.errorStore.errors)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[RootStore.errorStore.errors])
@@ -29,7 +30,6 @@ const SignUp:React.FC<Props>=()=>{
                 <h1 className={'text-center '}>Sign Up</h1>
                 <div className={'w-full md:w-full max-w-lg flex items-center flex-col'}>
                     <div className={"mt-8 w-full"}>
-
                         <InputLabel htmlFor='email'>Email:</InputLabel>
                         <Input id='email' onChange={(e)=>{setEmail(e.target.value)}} className={'w-full'} startAdornment={
                             <InputAdornment position="start">
@@ -37,7 +37,7 @@ const SignUp:React.FC<Props>=()=>{
                             </InputAdornment>
                         }
                         />
-                        {errMap.get("email") && <Alert severity="error" className={'p-0'}>{errMap.get("email")}</Alert>}
+                        {RootStore.errorStore.errors.get("email") && <Alert severity="error" className={'p-0'}>{RootStore.errorStore.errors.get("email")}</Alert>}
                     </div>
                     {}
                     <div className={"mt-8  w-full"}>
@@ -47,7 +47,7 @@ const SignUp:React.FC<Props>=()=>{
                                 <PersonIcon/>
                             </InputAdornment>
                         }   />
-                        {errMap.get("username") && <Alert severity="error" className={'p-0'}>{errMap.get("username")}</Alert>}
+                        {RootStore.errorStore.errors.get("username") && <Alert severity="error" className={'p-0'}>{RootStore.errorStore.errors.get("username")}</Alert>}
                     </div>
                     <div className={"mt-8 w-full"}>
                         <FormControl fullWidth>
@@ -86,8 +86,8 @@ const SignUp:React.FC<Props>=()=>{
                                 <LockIcon/>
                             </InputAdornment>
                         }  />
-                        {errMap.get("password") && <Alert  severity="error" className={'p-0 h-fit m-0'}>{errMap.get("password")}</Alert>}
-                        {errMap.get("repeatPassword") && <Alert severity="error" className={'p-0'}>{errMap.get("repeatPassword")}</Alert>}
+                        {RootStore.errorStore.errors.get("password") && <Alert  severity="error" className={'p-0 h-fit m-0'}>{RootStore.errorStore.errors.get("password")}</Alert>}
+                        {RootStore.errorStore.errors.get("repeatPassword") && <Alert severity="error" className={'p-0'}>{RootStore.errorStore.errors.get("repeatPassword")}</Alert>}
                     </div>
                     <button className={'w-full h-12 bg-submit-blue text-sm text-white mt-10 '} onClick={()=>RootStore.userStore.signUp(email,username,password,repeatedPassword, groupId)} type={"button"}>Sign Up</button>
 
@@ -95,6 +95,6 @@ const SignUp:React.FC<Props>=()=>{
                 </div>
         </div>
     )
-}
+})
 
-export default observer(SignUp)
+export default SignUp

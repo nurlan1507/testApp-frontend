@@ -1,7 +1,7 @@
 import {makeAutoObservable, observable,action} from 'mobx'
 export class HtmlStates{
-    @observable activeMenu:boolean
-    @action toggleActiveMenu(){
+    activeMenu:boolean
+    toggleActiveMenu(){
       this.activeMenu = !this.activeMenu
     }
     constructor() {

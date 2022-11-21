@@ -13,7 +13,7 @@ import CreateTest from './pages/CreateTest'
 import Navbar from "./componets/Navbar"
 import EditTest from "./pages/EditTest";
 // import TestPage from "./pages/TestPage";
-const App=observer(()=> {
+const App=()=> {
     const currentMode = 'light'
     return (
             <div>
@@ -27,13 +27,13 @@ const App=observer(()=> {
                                 <Route path={'/signIn'} element={<SignIn/>}/>
                                 <Route path={'/home'} element={<Home/>}/>
                                 <Route path={'/createTest'} element={<CreateTest/>}/>
-                                <Route path={'/editTest:id'} element={<EditTest/>} />
+                                <Route path={'/editTest'} element={<EditTest/>} />
                             </Routes>
                         </div>
                     </div>
                 </BrowserRouter>
             </div>
   );
-})
+}
 
 export default App;

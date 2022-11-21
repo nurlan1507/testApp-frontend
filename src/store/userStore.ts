@@ -23,13 +23,23 @@ interface IToken{
 
 
 export class UserStore implements IUser {
-  @observable userId = 0;
-  @observable username ='';
-  @observable email='';
-  @observable role='';
-  @observable exp=0;
-  @observable groupId = 0;
+    userId = 0;
+    username ='';
+    email='';
+    role='';
+    exp=0;
+    groupId = 0;
     constructor() {
+      makeObservable(this,{
+        userId:observable,
+        username:observable,
+        email: observable,
+        role:observable,
+        exp:observable,
+        groupId:observable,
+        signUp:action,
+        signIn:action
+      })
       try{
         const token = window.localStorage.getItem("accessToken")
         if(token !== undefined){
@@ -49,7 +59,7 @@ export class UserStore implements IUser {
     }
 
 
-    @action async signUp(email:string, username:string,password:string, repeatPassword:string,groupId:number|null) {
+    async signUp(email:string, username:string,password:string, repeatPassword:string,groupId:number|null) {
         try{
             let res = await singUpApi(email, username,password, repeatPassword,groupId)
             console.log(res)
@@ -66,7 +76,7 @@ export class UserStore implements IUser {
             return e
         }
     }
-    @action async signIn(email:string,password:string){
+    async signIn(email:string,password:string){
         try{
             let res = await signInApi(email,password)
             this.userId = res.Id
